@@ -1,0 +1,53 @@
+# Data 
+data/
+
+# Outputs
+outputs/models/
+outputs/figures/
+outputs/reports/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+# Ignore conda environment folders
+.conda/
+env/
+venv/
+*.env
+
+# Ignore python cache & binaries
+__pycache__/
+*.pyc
+*.pkl
+*.sqlite
+
+# Ignore data files if any
+*.csv
+*.h5
+# IDE folders
+.idea/
+.vscode/
+
+# Conda / environments
+.conda/
+env/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# Models & data
+*.pkl
+*.csv
