@@ -1,16 +1,39 @@
-# Credit-Card-Fraud-Detection
+# Credit Card Fraud Detection
+
+A machine learning pipeline for detecting fraudulent credit card transactions.  
+Trained on a dataset with a 559:1 class imbalance using XGBoost with threshold optimization.
+
+## Results
+
+| Metric | Validation | Test |
+|--------|------------|------|
+| F1-Score | 0.8757 | 0.8646 |
+| PR-AUC | 0.8527 | 0.8620 |
+| ROC-AUC | 0.9869 | 0.9736 |
 
 ## Project Structure
-```bash
-CREDIT_FRAUD_PROJECT/
-├── data/raw/              
-├── notebooks/             ← EDA + experiments
+```
+credit_fraud_project/
+├── data/
+│   └── raw/
+│       ├── train.csv
+│       ├── val.csv
+│       └── test.csv
+├── notebooks/
+│   ├── EDA.ipynb
+│   ├── feature_engineering.ipynb
+│   └── sampling_model_selection.ipynb
 ├── outputs/
-│   ├── models/            ← best_model.pkl
-│   ├── figures/           ← plots
-│   └── reports/           ← results CSV
+│   ├── models/
+│   ├── figures/
+│   └── reports/
 ├── src/
 │   ├── models/
+│   │   ├── logistic_model.py
+│   │   ├── rf_model.py
+│   │   ├── xgb_model.py
+│   │   ├── nn_model.py
+│   │   └── voting_model.py
 │   ├── config.py
 │   ├── feature_engineering.py
 │   ├── credit_fraud_train.py
@@ -30,32 +53,32 @@ pip install -r requirements.txt
 
 ## Usage
 ```bash
-# 1. Train best model
+# Train best model
 python src/credit_fraud_train.py
 
-# 2. Evaluate on Test set
+# Evaluate on Test set
 python src/credit_fraud_evaluate.py
 ```
 
-## Results
-| Metric   | Validation | Test   |
-|----------|------------|--------|
-| F1-Score | 0.8757     | 0.8646 |
-| PR-AUC   | 0.8527     | 0.8620 |
-| ROC-AUC  | 0.9869     | 0.9736 |
+## Approach
 
-## Key Decisions
-| Decision | Choice | Why |
-|----------|--------|-----|
-| Primary Metric | F1-Score | Balances Precision and Recall |
-| Imbalance | scale_pos_weight=559 | Sufficient without sampling |
-| Threshold | PR Curve (max F1) | Better than fixed 0.5 |
-| Calibration | Isotonic | Reliable probabilities |
-| Feature Selection | SelectFromModel (median) | Remove weak features |
-| CV Strategy | StratifiedKFold (5) | Preserve fraud ratio |
+**Feature Engineering**
+- `log_amount` — reduces skewness in Amount from 19.99 to 0.16
+- `time_sin`, `time_cos` — cyclical encoding of Time
 
-## Best Model
-- **Model:** XGBoost
-- **Sampling:** None (scale_pos_weight=559.28)
-- **Features:** 16 selected from 31
-- **Threshold:** 0.4180
+**Model Selection**  
+Seven sampling strategies × five models were evaluated on the Validation set.  
+XGBoost with no resampling achieved the best F1-Score — `scale_pos_weight=559.28` was sufficient to handle the class imbalance.
+
+**Threshold Optimization**  
+Optimal threshold derived from the Precision-Recall Curve by maximizing F1-Score.  
+A fixed threshold of 0.5 is inappropriate for imbalanced datasets.
+
+| Decision | Choice | Reason |
+|----------|--------|--------|
+| Primary metric | F1-Score | Balances precision and recall |
+| Imbalance handling | scale_pos_weight=559.28 | Sufficient without resampling |
+| Threshold | PR Curve (max F1) | Outperforms fixed threshold |
+| Calibration | Isotonic regression | Corrects XGBoost probability overconfidence |
+| Feature selection | SelectFromModel (median) | Removes low-importance features |
+| Cross-validation | StratifiedKFold (5 folds) | Preserves fraud ratio across folds |
