@@ -1,6 +1,3 @@
-# ═══════════════════════════════════════════════════════════
-# src/credit_fraud_utils_sampling.py
-# ═══════════════════════════════════════════════════════════
 """
 Sampling strategies for imbalanced classification.
 

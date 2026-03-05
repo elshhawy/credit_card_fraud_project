@@ -1,6 +1,3 @@
-# ═══════════════════════════════════════════════════════════
-# src/config.py
-# ═══════════════════════════════════════════════════════════
 """
 Central configuration for Credit Fraud Detection project.
 All paths, hyperparameters, and settings are defined here.

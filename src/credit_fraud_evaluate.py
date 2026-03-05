@@ -1,6 +1,3 @@
-# ═══════════════════════════════════════════════════════════
-# src/credit_fraud_evaluate.py
-# ═══════════════════════════════════════════════════════════
 """
 Final Test Evaluation for Credit Fraud Detection.
 

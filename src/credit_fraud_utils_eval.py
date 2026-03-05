@@ -1,6 +1,3 @@
-# ═══════════════════════════════════════════════════════════
-# src/credit_fraud_utils_eval.py
-# ═══════════════════════════════════════════════════════════
 """
 Evaluation utilities for Credit Fraud Detection.
 

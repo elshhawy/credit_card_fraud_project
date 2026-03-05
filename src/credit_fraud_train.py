@@ -1,6 +1,3 @@
-# ═══════════════════════════════════════════════════════════
-# src/credit_fraud_train.py
-# ═══════════════════════════════════════════════════════════
 """
 Main training pipeline for Credit Fraud Detection.
 

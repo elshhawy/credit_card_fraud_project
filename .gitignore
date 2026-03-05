@@ -2,9 +2,8 @@
 data/
 
 # Outputs
-outputs/models/
 outputs/figures/
-outputs/reports/
+
 
 # Python
 __pycache__/
@@ -29,7 +28,6 @@ venv/
 # Ignore python cache & binaries
 __pycache__/
 *.pyc
-*.pkl
 *.sqlite
 
 # Ignore data files if any
@@ -49,5 +47,4 @@ __pycache__/
 *.pyc
 
 # Models & data
-*.pkl
 *.csv
